@@ -18,7 +18,7 @@ criancaRoutes.route('/add').post(async function (req, res) {
         validarAltura(req.body.altura);
         validarCS(req.body.cs);
 
-        console.log(crianca)
+
         crianca.save(req.body)
             .then(result => {
                 res.status(200).json({ 'status': 'sucess', 'msg': 'usuário cadastrado com sucesso' });
@@ -28,7 +28,7 @@ criancaRoutes.route('/add').post(async function (req, res) {
             });
 
     } catch (error) {
-        res.status(400).json({ 'status': 'failure', 'msg': error.message });
+        res.status(400).json({ 'status': 'failure', 'msg': 'Não foi possivel cadastrar esse usuário' });
     }
 });
 
