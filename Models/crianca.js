@@ -6,7 +6,7 @@ let userCrianca = new Schema({
         type: String
     },
     idade: {
-        type: String
+        type: Number
     },
     peso: {
         type: Number
