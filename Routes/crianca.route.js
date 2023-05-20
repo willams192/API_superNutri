@@ -2,6 +2,7 @@ const express = require('express');
 const crianca = require('../Models/crianca');
 const app = express();
 const criancaRoutes = express.Router();
+const { validarNome, validarIdade, validarPeso, validarAltura, validarCS } = require('../Validation/validationsCrianca');
 
 
 
@@ -10,14 +11,25 @@ let Crianca = require('../Models/crianca')
 // adiciona o usuário
 criancaRoutes.route('/add').post(async function (req, res) {
     let crianca = new Crianca(req.body);
-    console.log(crianca)
-    crianca.save(req.body)
-        .then(result => {
-            res.status(200).json({ 'status': 'sucess', 'msg': 'usuário cadastrado com sucesso' });
-        })
-        .catch(err => {
-            res.status(409).json({ 'status': 'failure', 'msg': 'usuário não cadastrado' + err.message })
-        });
+    try {
+        validarNome(req.body.nome);
+        validarIdade(req.body.idade);
+        validarPeso(req.body.peso);
+        validarAltura(req.body.altura);
+        validarCS(req.body.cs);
+
+        console.log(crianca)
+        crianca.save(req.body)
+            .then(result => {
+                res.status(200).json({ 'status': 'sucess', 'msg': 'usuário cadastrado com sucesso' });
+            })
+            .catch(err => {
+                res.status(409).json({ 'status': 'failure', 'msg': 'usuário não cadastrado' + err.message })
+            });
+
+    } catch (error) {
+        res.status(400).json({ 'status': 'failure', 'msg': error.message });
+    }
 });
 
 
