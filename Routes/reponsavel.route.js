@@ -28,5 +28,28 @@ responsavelRoutes.route('/add').post(async function (req, res) {
     };
 });
 
+// Rota de login
+responsavelRoutes.route('/login').post(async function (req, res) {
+    const { email, senha } = req.body;
+  
+    try {
+      validarEmail(email);
+      validarSenha(senha);
+  
+      const responsavel = await Responsavel.findOne({ email, senha });
+  
+      if (responsavel) {
+        // Login bem-sucedido
+        res.status(200).json({ status: 'success', msg: 'Login realizado com sucesso' });
+      } else {
+        // Usuário não encontrado
+        res.status(404).json({ status: 'failure', msg: 'Usuário não encontrado' });
+      }
+    } catch (error) {
+      // Erro de validação
+      res.status(400).json({ status: 'failure', msg: 'Erro de validação', error: error.message });
+    }
+  });
+
 
 module.exports = responsavelRoutes;

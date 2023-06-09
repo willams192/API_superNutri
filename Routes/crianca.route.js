@@ -16,7 +16,6 @@ criancaRoutes.route('/add').post(async function (req, res) {
         validarIdade(req.body.idade);
         validarPeso(req.body.peso);
         validarAltura(req.body.altura);
-        validarCS(req.body.cs);
 
 
         crianca.save(req.body)
@@ -36,15 +35,16 @@ criancaRoutes.route('/add').post(async function (req, res) {
 
 
 // api puxando os usuários
-criancaRoutes.route('/').get(function (req, res) {
-    Crianca.find(function (err, crianca) {
-        if (err) {
-            res.status(400).send({ 'status': 'failure', 'msg': 'Algo deu errado' })
-        } else {
-            res.status(200).json({ 'status': 'sucess', 'crianca': crianca });
-        };
-    });
-});
+criancaRoutes.route('/').get(async function (req, res) {
+    try {
+      const criancas = await Crianca.find();
+      res.status(200).json({ 'status': 'success', 'criancas': criancas });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ 'status': 'failure', 'msg': 'Algo deu errado' });
+    }
+  });
+  
 
 
 // usuario especifico

@@ -13,10 +13,7 @@ let userCrianca = new Schema({
     },
     altura: {
         type: Number
-    },
-    cs: {
-        type: String
-    },
+    }
 }, {
     collection: 'Crianca'
 });
