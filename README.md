@@ -6,4 +6,4 @@ Basicamente esse repositório esta suportando a APi do front - end, em que está
 <br>
   - https://github.com/dayvsonspacca/supernutri-app
 <br>
-Nesse repositório está o front do projeto, lembrando que para o rodar o projeto SuperNutri será necéssario clonar tanto esse repositorio quanto o outro, além de que é importante que tenha o mongoDB instalao.
+Nesse repositório do link acima está o front do projeto, lembrando que para o rodar o projeto SuperNutri será necéssario clonar tanto esse repositorio quanto o outro, além de que é importante que tenha o mongoDB instalado.
